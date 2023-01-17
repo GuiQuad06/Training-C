@@ -24,14 +24,6 @@ struct point { int num;
 				float y;
 };
 
-/* Liste chaînée */
-struct element {
-	int num;
-	float x;
-	float y;
-	struct element * next;
-};
-
 int display_points(struct point my_point[]);
 int read_points(struct point my_point[]);
 void som(void);
@@ -49,8 +41,6 @@ int sort_bulle(int data[], short size);
 int sort_croissant(int data[], short size);
 int sort_permut(int data[], short size);
 void FirstFactorial(int num);
-void creation(struct element * * adeb);
-void display_list(struct element * start);
 int binarySearch(int * array, int thing, int start, int end);
 
 #endif /* BASICS_H_ */
