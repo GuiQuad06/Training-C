@@ -296,6 +296,7 @@ void display_list(struct element * start)
 }
 /**********************************************/
 
+/* Algo recherche binaire */
 int binarySearch(int * array, int thing, int start, int end)
 {
 	if(start > end)
