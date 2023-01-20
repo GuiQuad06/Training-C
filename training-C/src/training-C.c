@@ -30,6 +30,7 @@ struct point myPoints[NB_POINTS];
 /* Bytes manip variables */
 uint8_t byte_to_test = 0x95;
 uint32_t reg_to_test = 0xAE010359;
+uint8_t byte_1 = 0x5A ;
 char* nmea_frame = "GPZDA,133358,09,05,2007,,";
 
 /* String manip variables */
@@ -86,6 +87,12 @@ int main(void) {
 	printf("Il y a %d bits à '1' dans le byte de data : 0x%2x\r\n", check_parity(byte_to_test), byte_to_test);
 	printf("Le XOR checksum est de 0x%2x sur la data 0x%8x à l'adresse 0x%8x\r\n", xor_checksum_32b(reg_to_test, REG_SIZE), reg_to_test, &reg_to_test);
 	printf("Le xor de la trame ascii est 0x%2x\r\n", xor_checksum(nmea_frame, NMEA_SIZE));
+
+	printf("Byte 1 : 0x%2x\n", byte_1);
+	set_bit(&byte_1, 0x20);
+	printf("Byte 1 avec le bit 5 setté : 0x%2x\n", byte_1 );
+	clear_bit(&byte_1, 0x02);
+	printf("Byte 1 avec le bit 1 clearé : 0x%2x\n", byte_1 );
 
 	/* String manipulation */
 	printf("Il y a %d 'e' dans la chaine donnée\n", nb_char(string, 'e', strlen(string)));
