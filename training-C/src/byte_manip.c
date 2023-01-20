@@ -7,6 +7,17 @@
 
 #include "byte_manip.h"
 
+
+void set_bit(uint8_t * byte, uint8_t mask)
+{
+    *byte |= mask;
+}
+
+void clear_bit(uint8_t * byte, uint8_t mask)
+{
+    *byte &= ~(mask);
+}
+
 int check_parity(uint8_t byte)
 {
     int i, acc = 0;

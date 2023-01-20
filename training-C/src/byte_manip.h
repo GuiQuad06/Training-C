@@ -10,6 +10,8 @@
 
 #include <stdint.h>
 
+void set_bit(uint8_t * byte, uint8_t mask);
+void clear_bit(uint8_t * byte, uint8_t mask);
 int check_parity(uint8_t byte);
 uint8_t xor_checksum_32b(uint32_t reg, unsigned int size);
 uint8_t xor_checksum(char* string, unsigned int size);
