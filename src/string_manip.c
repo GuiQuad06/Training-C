@@ -13,16 +13,18 @@
 int nb_char(char * str, char c, short size)
 {
 	int cpt = 0 ;
+    char * ptr;
+    ptr = str;
 
 	if(size > LINE_MAX) {
 		printf("Petit problème dans ma plantation\n");
 		return -1;
 	}
 	else {
-		for (int i = 0 ; i < size ; i++) {
-			if(str[i] == c)
-				cpt++;
-		}
+        while((ptr = strchr(ptr, c))) {
+            ptr++;
+            cpt++;
+        }
 	}
 	return cpt;
 }
@@ -70,7 +72,7 @@ void delete_char(char * str, char c )
 	char * addr;
 	addr = str;
 
-	while(addr = strchr(addr, c)) {
+	while((addr = strchr(addr, c))) {
 		strcpy(addr, addr+1);
 	}
 
