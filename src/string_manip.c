@@ -6,6 +6,7 @@
  */
 
 #include "string_manip.h"
+#include <ctype.h>
 #include <string.h>
 #include <stdio.h>
 
@@ -40,7 +41,7 @@ void LongestWord(char * sen)
     char tmp[size];
 
     for (i = 0 ; i <= size ; i++) {
-    	if(isAlphaNum(sen[i])) {
+    	if(isalnum(sen[i])) {
     		tmp[cpt_word++] = sen[i];
     	}
     	else {
