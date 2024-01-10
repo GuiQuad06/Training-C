@@ -20,8 +20,15 @@ typedef struct {
 #define STRING_LIST_INIT_NODUP    { 0 }
 #define STRING_LIST_INIT          { .dup_strings = 1 }
 
+/*
+ * Function pointer to allow implement a specific callback, for the clear
+ */
+typedef void (*cb_clear_function_t)(const char *str);
+
 // Exported function prototypes
 void string_list_init(string_list_t *list);
 void string_list_init_nodup(string_list_t *list);
+void string_list_clear_fct(string_list_t *list, cb_clear_function_t clearfunc);
+void string_list_clear(string_list_t *list);
 
 #endif // STRING_LIST_H_
