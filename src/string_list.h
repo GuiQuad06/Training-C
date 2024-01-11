@@ -26,9 +26,12 @@ typedef struct {
 typedef void (*cb_clear_function_t)(const char *str);
 
 // Exported function prototypes
+char *my_strdup(const char *str);
 void string_list_init(string_list_t *list);
 void string_list_init_nodup(string_list_t *list);
 void string_list_clear_fct(string_list_t *list, cb_clear_function_t clearfunc);
 void string_list_clear(string_list_t *list);
+item_t *string_list_append(string_list_t *list, const char * str);
+item_t *string_list_append_nodup(string_list_t *list, const char * str);
 
 #endif // STRING_LIST_H_

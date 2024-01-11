@@ -2,6 +2,17 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include "utils.h"
+
+char *my_strdup(const char *str)
+{
+    size_t len = strlen(str) + 1;
+    char * res = malloc(len);
+
+    if(res)
+        memcpy(res, str, len);
+    return res;
+}
 
 void string_list_init(string_list_t *list)
 {
@@ -55,4 +66,21 @@ void string_list_clear(string_list_t *list)
     list->item = NULL;
     list->nb = 0;
     list->alloc = 0;
+}
+
+item_t *string_list_append(string_list_t *list, const char * str)
+{
+    return string_list_append_nodup(list, \
+            list->dup_strings ? my_strdup((char *)str) : (char *)str);
+}
+
+item_t *string_list_append_nodup(string_list_t *list, const char * str)
+{
+    item_t * retval;
+    ALLOC_GROW(list->item, list->nb + 1, list->alloc);
+
+    retval = &list->item[list->nb++];
+    *retval = (char *)str;
+
+    return retval;
 }
