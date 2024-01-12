@@ -14,6 +14,11 @@ char *my_strdup(const char *str)
     return res;
 }
 
+void *my_memdup(const void *data, size_t len)
+{
+    return memcpy(malloc(len), data, len);
+}
+
 void string_list_init(string_list_t *list)
 {
     string_list_t empty = STRING_LIST_INIT;
@@ -83,4 +88,51 @@ item_t *string_list_append_nodup(string_list_t *list, const char * str)
     *retval = (char *)str;
 
     return retval;
+}
+
+int string_list_split(string_list_t *list, const char *str, int delim, int maxsplit)
+{
+    if (!list->dup_strings)
+    {
+        fprintf(stderr, "the dup_strings list member must be set to 1");
+        return -1;
+    }
+    else
+    {
+        unsigned int cpt = 0;
+        char * end;
+        const char * p;
+        p = str;
+
+        while(*p != '\0')
+        {
+            cpt++;
+
+            if (maxsplit >= 0 && cpt > maxsplit)
+            {
+                //Append the string
+                string_list_append(list, p);
+                return cpt;
+            }
+            else
+            {
+                end = strchr(p, delim);
+
+                if(end)
+                {
+                    //Append the string we should not use the one with dup 
+                    //Because we want to adapt the lenth according to the delimiter
+                    string_list_append_nodup(list, my_memdup(p, end - p));
+                    //Place the p pointer after the delimiter
+                    p = end + 1;
+                }
+                else
+                {
+                    //Append the string
+                    string_list_append(list, p);
+                    return cpt;
+                }
+            }
+        }
+    }
 }
