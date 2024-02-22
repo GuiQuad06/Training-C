@@ -6,22 +6,25 @@
  */
 
 #include "string_manip.h"
+#include <ctype.h>
 #include <string.h>
 #include <stdio.h>
 
 int nb_char(char * str, char c, short size)
 {
 	int cpt = 0 ;
+    char * ptr;
+    ptr = str;
 
 	if(size > LINE_MAX) {
 		printf("Petit problème dans ma plantation\n");
 		return -1;
 	}
 	else {
-		for (int i = 0 ; i < size ; i++) {
-			if(str[i] == c)
-				cpt++;
-		}
+        while(ptr = strchr(ptr, c)) {
+            ptr++;
+            cpt++;
+        }
 	}
 	return cpt;
 }
@@ -40,7 +43,7 @@ void LongestWord(char * sen)
     char tmp[size];
 
     for (i = 0 ; i <= size ; i++) {
-    	if(isAlphaNum(sen[i])) {
+    	if(isalnum(sen[i])) {
     		tmp[cpt_word++] = sen[i];
     	}
     	else {
