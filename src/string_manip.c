@@ -91,21 +91,21 @@ void create_file(char file_name[])
 
 	do {
 		printf("Donner nom:");
-		scanf("%s",&myContact.nom); getchar();
+		scanf("%s",&myContact.nom[0]); getchar();
 		printf("Donner prenom:");
-		scanf("%s", &myContact.prenom); getchar();
+		scanf("%s", &myContact.prenom[0]); getchar();
 		printf("Donner age:");
-		scanf("%d", &myContact.age ); getchar();
+		scanf("%s", &myContact.age[0]); getchar();
 		printf("Donner téléphone:");
-		scanf("%s", &myContact.tel); getchar();
+		scanf("%s", &myContact.tel[0]); getchar();
 
-		fwrite(&myContact.nom, sizeof(myContact), 1, file);
+		fwrite(&myContact.nom, sizeof(myContact.nom), 1, file);
 		fprintf(file, "\n");
-		fwrite(&myContact.prenom, sizeof(myContact), 1, file);
+		fwrite(&myContact.prenom, sizeof(myContact.prenom), 1, file);
 		fprintf(file, "\n");
-		fwrite(&myContact.age, sizeof(myContact), 1, file);
+		fwrite(&myContact.age, sizeof(myContact.age), 1, file);
 		fprintf(file, "\n");
-		fwrite(&myContact.tel, sizeof(myContact), 1, file);
+		fwrite(&myContact.tel, sizeof(myContact.tel), 1, file);
 		fprintf(file, "\n");
 
 		printf("Nouveau contact ?"); c = getchar();

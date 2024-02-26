@@ -16,7 +16,7 @@
 struct contact {
 	char nom[21];
 	char prenom[16];
-	int  age;
+	char age[3];
 	char tel[12];
 };
 
