@@ -46,6 +46,14 @@ void print_list(linked_list_t *head);
  */
 int remove_node(linked_list_t **head, int n);
 
-linked_list_t *insert_node(int n, int pos);
+/**
+ * @brief Insert a node in a specific position
+ * @param head : points the head's address list
+ * @param[in] n : data to be inserted
+ * @param[in] pos : position to insert the data
+ * @return int : status (0 if succeed or pos
+ * if the parameter pos was not found)
+ */
+int insert_node(linked_list_t **head, int n, int pos);
 
 #endif // LINKED_LIST_H_

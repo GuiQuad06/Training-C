@@ -97,7 +97,36 @@ int remove_node(linked_list_t **head, int n)
     return n;
 }
 
-linked_list_t *insert_node(int n, int pos)
+int insert_node(linked_list_t **head, int n, int pos)
 {
+    linked_list_t *new = NULL;
+    linked_list_t *current = *head;
+    linked_list_t *prev = *head;
+    unsigned int index = 0;
 
+    new = malloc(sizeof(linked_list_t));
+
+    // Check the dynamic memory allocation
+    if (new == NULL)
+        return EXIT_FAILURE;
+
+    // Iterate over the linked list
+    while(current != NULL)
+    {
+        // When I found the position new node will pouints to the current element
+        // and tghe previous element will points to the new inserted one
+        if(index == pos)
+        {
+            new->data = n;
+            new->next = current;
+            prev->next = new;
+
+            return EXIT_SUCCESS;
+        }
+
+        prev = current;
+        current = current->next;
+        index++;
+    }
+    return pos;
 }
