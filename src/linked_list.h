@@ -36,8 +36,14 @@ void clear_list(linked_list_t *list);
  */
 void print_list(linked_list_t *list);
 
+/**
+ * @brief Remove the wanted node from the list
+ * @param[in] n : data to be removed
+ * @return int : status (0 if succeed or n
+ * if the parameter n was not found)
+ */
+int remove_node(int n);
 
-linked_list_t *remove_node(int n);
 linked_list_t *insert_node(int n, int pos);
 
 #endif // LINKED_LIST_H_

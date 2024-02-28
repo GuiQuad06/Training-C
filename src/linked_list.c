@@ -70,9 +70,33 @@ void print_list(linked_list_t *list)
     return;
 }
 
-linked_list_t *remove_node(int n)
+int remove_node(int n)
 {
+    linked_list_t *current = head;
+    linked_list_t *prev = head;
 
+    while(current != NULL)
+    {
+        // If node was found remove from the list
+        if (current->data == n)
+        {
+            if (current == head)
+            {
+                head = current->next;
+            }
+            else
+            {
+                prev->next = current->next;
+            }
+            free(current);
+            current = NULL;
+
+            return 1;
+        }
+        prev = current;
+        current = current->next;
+    }
+    return 0;
 }
 
 linked_list_t *insert_node(int n, int pos)
