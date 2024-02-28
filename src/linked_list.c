@@ -2,9 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-linked_list_t *head = NULL;
-
-linked_list_t *add_node(int n)
+int add_node(linked_list_t **head, int n)
 {
     linked_list_t *node = NULL;
 
@@ -12,10 +10,10 @@ linked_list_t *add_node(int n)
 
     // Return if the previous malloc failed
     if (node == NULL)
-        return NULL;
+        return EXIT_FAILURE;
     
     // List is empty
-    if (head == NULL)
+    if (*head == NULL)
     {
         node->data = n;
 
@@ -23,7 +21,7 @@ linked_list_t *add_node(int n)
         // which means very first element will be the tail
         // So its next element will points to NULL
         node->next = NULL;
-        head = node;
+        *head = node;
     }
     else // List already has nodes
     {
@@ -32,57 +30,57 @@ linked_list_t *add_node(int n)
         // Link the previous HEAD list
         // and created node becomes the HEAD
         // Add to the head is O(1)
-        node->next = head;
-        head = node;
+        node->next = *head;
+        *head = node;
     }
-    return node;
+    return EXIT_SUCCESS;
 }
 
-void clear_list(linked_list_t *list)
+void clear_list(linked_list_t **head)
 {
-    linked_list_t *current = list;
+    linked_list_t *current = *head;
 
     while(current != NULL)
     {
         // Make head list points to next element 
-        if (current == list)
+        if (current == *head)
         {
-            list = current->next;
+            *head = current->next;
         }
         else // current is no more pointed by list
         {
             free(current);
             // current will point to the next element
             // so at the tail, it will be current = NULL
-            current = list;
+            current = *head;
         }
     }
     return;
 }
 
-void print_list(linked_list_t *list)
+void print_list(linked_list_t *head)
 {
-    while(list != NULL)
+    while(head != NULL)
     {
-        printf("data:%d\n", list->data);
-        list = list->next;
+        printf("data:%d\n", head->data);
+        head = head->next;
     }
     return;
 }
 
-int remove_node(int n)
+int remove_node(linked_list_t **head, int n)
 {
-    linked_list_t *current = head;
-    linked_list_t *prev = head;
+    linked_list_t *current = *head;
+    linked_list_t *prev = *head;
 
     while(current != NULL)
     {
         // If node was found remove from the list
         if (current->data == n)
         {
-            if (current == head)
+            if (current == *head)
             {
-                head = current->next;
+                *head = current->next;
             }
             else
             {
@@ -91,12 +89,12 @@ int remove_node(int n)
             free(current);
             current = NULL;
 
-            return 1;
+            return EXIT_SUCCESS;
         }
         prev = current;
         current = current->next;
     }
-    return 0;
+    return n;
 }
 
 linked_list_t *insert_node(int n, int pos)

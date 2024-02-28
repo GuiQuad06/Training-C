@@ -16,33 +16,35 @@ typedef struct {
 /**
  * @brief Add a node in a dynamic linked list
  * The node will be added to the head
+ * @param head : points the head's address of the list
  * @param[in] n : the integer data to add at the head list
- * @return linked_list_t* a pointer to the outcome linked list
+ * @return int : status
  */
-linked_list_t *add_node(int n);
+int add_node(linked_list_t **head, int n);
 
 /**
  * @brief Clear all nodes of a dynamic linked list
  * by performing free() on the elements
- * @param[in] list : a pointer to the head of linked list
+ * @param[in] head : a pointer to the head's address of linked list
  * @return none.
  */
-void clear_list(linked_list_t *list);
+void clear_list(linked_list_t **head);
 
 /**
  * @brief Display all node's data of a dynamic linked list
- * @param[in] list : a pointer to the head of linked list
+ * @param[in] head : a pointer to the head of linked list
  * @return none.
  */
-void print_list(linked_list_t *list);
+void print_list(linked_list_t *head);
 
 /**
  * @brief Remove the wanted node from the list
+ * @param head : points the head's address list
  * @param[in] n : data to be removed
  * @return int : status (0 if succeed or n
  * if the parameter n was not found)
  */
-int remove_node(int n);
+int remove_node(linked_list_t **head, int n);
 
 linked_list_t *insert_node(int n, int pos);
 
