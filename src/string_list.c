@@ -73,19 +73,19 @@ void string_list_clear(string_list_t *list)
     list->alloc = 0;
 }
 
-item_t *string_list_append(string_list_t *list, char * str)
+item_t *string_list_append(string_list_t *list, const char * str)
 {
     return string_list_append_nodup(list, \
             list->dup_strings ? my_strdup((char *)str) : (char *)str);
 }
 
-item_t *string_list_append_nodup(string_list_t *list, char * str)
+item_t *string_list_append_nodup(string_list_t *list, const char * str)
 {
     item_t * retval;
     ALLOC_GROW(list->item, list->nb + 1, list->alloc);
 
     retval = &list->item[list->nb++];
-    *retval = str;
+    *retval = (char *)str;
 
     return retval;
 }

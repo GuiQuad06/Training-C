@@ -264,39 +264,7 @@ int display_points(struct point my_point[])
 }
 /**********************************************/
 
-/*********** Utilisation liste chaînée ********/
-void creation(struct element * * adeb)
-{
-	int num;
-	float x, y;
-	struct element * current;
-	* adeb = NULL;
-
-	while (printf("numero x y :"),
-			scanf("%d %f %f", &num, &x, &y), num)
-	{
-		current = (struct element*) malloc (sizeof(struct element));
-		current->num = num;
-		current->x = x;
-		current->y = y;
-		current->next = * adeb;
-		* adeb = current;
-	}
-}
-
-void display_list(struct element * start)
-{
-	while(start) {
-		printf("Num : %d", (start)->num);
-		printf("X : %f", (start)->x);
-		printf("Y : %f", (start)->y);
-		printf("\n");
-		start = (start)->next;
-	}
-}
-/**********************************************/
-
-/* Algo recherche binaire */
+/* Algo recherche binaire recursif */
 int binarySearch(int * array, int thing, int start, int end)
 {
 	if(start > end)
