@@ -190,48 +190,6 @@ void swap(int * ad1, int * ad2)
 	*ad1 = tmp;
 }
 
-/* Tri par sélection */
-int sort_croissant(int data[], short size)
-{
-	for (int i = 0 ; i < size-1 ; i++) {
-		for (int j = i+1 ; j < size ; j++) {
-			if(data[i] > data[j])
-				swap(data+i, data+j);
-		}
-	}
-	return 0;
-}
-
-/* Tri à bulle */
-int sort_bulle(int data[], short size)
-{
-	for (int i = 1 ; i <= size ; i++) {
-		for (int j = 0 ; j < size-1 ; j++) {
-			if(data[j] > data[j+1])
-				swap(data+j, data+(j+1));
-		}
-	}
-	return 0;
-}
-
-/* Tri par permutation */
-int sort_permut(int data[], short size)
-{
-	int i, j, tmp, k;
-
-	for (i = 1 ; i < size ; i++) {
-		if(data[i] < data[i-1]) {
-			j = 0;
-			while(data[i] > data[j]) j++;
-
-			tmp = data[i];
-			for(k = i-1 ; k >= j ; k--) data[k+1] = data[k]; // "Shift Reg"
-			data[j] = tmp;
-		}
-	}
-	return 0;
-}
-
 void FirstFactorial(int num)
 {
 	int i;
