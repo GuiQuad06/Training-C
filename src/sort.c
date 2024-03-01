@@ -3,6 +3,18 @@
 
 #include <stdlib.h>
 
+/* Merge sort bottom up */
+int bottom_up(int *data, size_t size)
+{
+
+}
+
+/* Merge sort top down */
+int top_down(int *data, size_t size)
+{
+
+}
+
 /* Selection Sort */
 int selection_sort(int data[], size_t size)
 {
