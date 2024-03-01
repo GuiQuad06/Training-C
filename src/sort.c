@@ -2,11 +2,65 @@
 #include "basics.h"
 
 #include <stdlib.h>
+#include <string.h>
+
+static inline int min(int a, int b)
+{
+    return (a < b ? a : b);
+}
+
+static void merge_bu(int *dst, int *src, int start, int mid, int end)
+{
+    int j = start;
+    int k = mid;
+
+    for (int i = start; i < end; i++)
+    {
+        if (j < mid && (k >= end || src[j] <= src[k]))
+        {
+            dst[i] = src[j];
+            j++;
+        }
+        else
+        {
+            dst[i] = src[k];
+            k++;
+        }
+    }
+}
 
 /* Merge sort bottom up */
 int bottom_up(int *data, size_t size)
 {
+    int data_res[size];
+    int *data_ptr, *data_res_ptr;
 
+    if (data == NULL || size <= 1)
+        return EXIT_FAILURE;
+
+    data_ptr = data;
+    data_res_ptr = data_res;
+
+    (void) memset(data_res, 0, size * sizeof(*data));
+    
+    // Width of the sort scope
+    for (int width = 1; width < size; width *= 2)
+    {
+        // Iterate over each scope
+        for (int i = 0; i < size; i += 2*width)
+        {
+            // Sort the scope
+            merge_bu(data_res_ptr, data_ptr, i, min(i + width, (int)size), min(i + 2*width, (int)size));
+        }
+        // Swapp data_res and data pointers
+        data_ptr = (data_ptr == data ? data_res : data);
+        data_res_ptr = (data_res_ptr == data_res ? data : data_res);
+    }
+
+    // Copy the result in data param pointer so that caller retreive the sorted data
+    (void) memcpy(data, data_res, size * sizeof(*data));
+
+    return EXIT_SUCCESS;
 }
 
 /* Merge sort top down */
