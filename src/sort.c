@@ -9,7 +9,7 @@ static inline int min(int a, int b)
     return (a < b ? a : b);
 }
 
-static void merge_bu(int *dst, int *src, int start, int mid, int end)
+static void bottom_up(int *dst, int *src, int start, int mid, int end)
 {
     int j = start;
     int k = mid;
@@ -30,7 +30,7 @@ static void merge_bu(int *dst, int *src, int start, int mid, int end)
 }
 
 /* Merge sort bottom up */
-int bottom_up(int *data, size_t size)
+int merge_sort(int *data, size_t size)
 {
     int data_res[size];
     int *data_ptr, *data_res_ptr;
@@ -50,7 +50,7 @@ int bottom_up(int *data, size_t size)
         for (int i = 0; i < size; i += 2*width)
         {
             // Sort the scope
-            merge_bu(data_res_ptr, data_ptr, i, min(i + width, (int)size), min(i + 2*width, (int)size));
+            bottom_up(data_res_ptr, data_ptr, i, min(i + width, (int)size), min(i + 2*width, (int)size));
         }
         // Swapp data_res and data pointers
         data_ptr = (data_ptr == data ? data_res : data);
@@ -61,12 +61,6 @@ int bottom_up(int *data, size_t size)
     (void) memcpy(data, data_res, size * sizeof(*data));
 
     return EXIT_SUCCESS;
-}
-
-/* Merge sort top down */
-int top_down(int *data, size_t size)
-{
-
 }
 
 /* Selection Sort */
