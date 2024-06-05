@@ -1,4 +1,5 @@
 #include "linked_list.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -11,7 +12,7 @@ int add_node(linked_list_t **head, int n)
     // Return if the previous malloc failed
     if (node == NULL)
         return EXIT_FAILURE;
-    
+
     // List is empty
     if (*head == NULL)
     {
@@ -21,7 +22,7 @@ int add_node(linked_list_t **head, int n)
         // which means very first element will be the tail
         // So its next element will points to NULL
         node->next = NULL;
-        *head = node;
+        *head      = node;
     }
     else // List already has nodes
     {
@@ -31,7 +32,7 @@ int add_node(linked_list_t **head, int n)
         // and created node becomes the HEAD
         // Add to the head is O(1)
         node->next = *head;
-        *head = node;
+        *head      = node;
     }
     return EXIT_SUCCESS;
 }
@@ -40,9 +41,9 @@ void clear_list(linked_list_t **head)
 {
     linked_list_t *current = *head;
 
-    while(current != NULL)
+    while (current != NULL)
     {
-        // Make head list points to next element 
+        // Make head list points to next element
         if (current == *head)
         {
             *head = current->next;
@@ -60,7 +61,7 @@ void clear_list(linked_list_t **head)
 
 void print_list(linked_list_t *head)
 {
-    while(head != NULL)
+    while (head != NULL)
     {
         printf("data:%d\n", head->data);
         head = head->next;
@@ -71,9 +72,9 @@ void print_list(linked_list_t *head)
 int remove_node(linked_list_t **head, int n)
 {
     linked_list_t *current = *head;
-    linked_list_t *prev = *head;
+    linked_list_t *prev    = *head;
 
-    while(current != NULL)
+    while (current != NULL)
     {
         // If node was found remove from the list
         if (current->data == n)
@@ -91,7 +92,7 @@ int remove_node(linked_list_t **head, int n)
 
             return EXIT_SUCCESS;
         }
-        prev = current;
+        prev    = current;
         current = current->next;
     }
     return n;
@@ -99,10 +100,10 @@ int remove_node(linked_list_t **head, int n)
 
 int insert_node(linked_list_t **head, int n, int pos)
 {
-    linked_list_t *new = NULL;
+    linked_list_t *new     = NULL;
     linked_list_t *current = *head;
-    linked_list_t *prev = *head;
-    unsigned int index = 0;
+    linked_list_t *prev    = *head;
+    unsigned int index     = 0;
 
     new = malloc(sizeof(linked_list_t));
 
@@ -111,20 +112,20 @@ int insert_node(linked_list_t **head, int n, int pos)
         return EXIT_FAILURE;
 
     // Iterate over the linked list
-    while(current != NULL)
+    while (current != NULL)
     {
         // When I found the position new node will pouints to the current element
         // and tghe previous element will points to the new inserted one
-        if(index == pos)
+        if (index == pos)
         {
-            new->data = n;
-            new->next = current;
+            new->data  = n;
+            new->next  = current;
             prev->next = new;
 
             return EXIT_SUCCESS;
         }
 
-        prev = current;
+        prev    = current;
         current = current->next;
         index++;
     }

@@ -14,9 +14,11 @@
 #define NB_POINTS 5
 
 /* Structure */
-struct point { int num;
-				float x;
-				float y;
+struct point
+{
+    int num;
+    float x;
+    float y;
 };
 
 int display_points(struct point my_point[]);
@@ -30,10 +32,10 @@ int fibonacci(int n);
 int _fibonacci(int n);
 int print_table(int n);
 void min_max(int tab[], short size);
-void min_max_param(int data[], short size, int * min, int * max);
-void min_max_ptr(int * data, short size);
+void min_max_param(int data[], short size, int *min, int *max);
+void min_max_ptr(int *data, short size);
 void FirstFactorial(int num);
-int binarySearch(int * array, int thing, int start, int end);
-void swap(int * ad1, int * ad2);
+int binarySearch(int *array, int thing, int start, int end);
+void swap(int *ad1, int *ad2);
 
 #endif /* BASICS_H_ */
