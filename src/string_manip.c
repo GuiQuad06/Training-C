@@ -6,35 +6,39 @@
  */
 
 #include "string_manip.h"
-#include <ctype.h>
-#include <string.h>
-#include <stdio.h>
 
-int nb_char(char * str, char c, short size)
+#include <ctype.h>
+#include <stdio.h>
+#include <string.h>
+
+int nb_char(char *str, char c, short size)
 {
-	int cpt = 0 ;
-    char * ptr;
+    int cpt = 0;
+    char *ptr;
     ptr = str;
 
-	if(size > LINE_MAX) {
-		printf("Petit problème dans ma plantation\n");
-		return -1;
-	}
-	else {
-        while((ptr = strchr(ptr, c))) {
+    if (size > LINE_MAX)
+    {
+        printf("Petit problème dans ma plantation\n");
+        return -1;
+    }
+    else
+    {
+        while ((ptr = strchr(ptr, c)))
+        {
             ptr++;
             cpt++;
         }
-	}
-	return cpt;
+    }
+    return cpt;
 }
 
 int isAlphaNum(char c)
 {
-	return (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')) || ((c >= '0') && (c <= '9')));
+    return (((c >= 'a') && (c <= 'z')) || ((c >= 'A') && (c <= 'Z')) || ((c >= '0') && (c <= '9')));
 }
 
-void LongestWord(char * sen)
+void LongestWord(char *sen)
 {
     int cpt_word = 0;
     int i;
@@ -42,90 +46,102 @@ void LongestWord(char * sen)
     char result[size];
     char tmp[size];
 
-    for (i = 0 ; i <= size ; i++) {
-    	if(isalnum(sen[i])) {
-    		tmp[cpt_word++] = sen[i];
-    	}
-    	else {
-    		cpt_word = 0;
-    		if(strlen(tmp) > strlen(result)) {
-    			strcpy(result, tmp);
-    		}
-    	}
+    for (i = 0; i <= size; i++)
+    {
+        if (isalnum(sen[i]))
+        {
+            tmp[cpt_word++] = sen[i];
+        }
+        else
+        {
+            cpt_word = 0;
+            if (strlen(tmp) > strlen(result))
+            {
+                strcpy(result, tmp);
+            }
+        }
     }
     printf("%s", result);
 }
 
-void FirstReverse(char * str)
+void FirstReverse(char *str)
 {
-	int size = strlen(str);
-	char tmp[size];
+    int size = strlen(str);
+    char tmp[size];
 
-	for(int i = 0 ; i <= size ; i++) {
-		tmp[i] = str[(size-1)-i];
-	}
-	printf("%s", tmp);
+    for (int i = 0; i <= size; i++)
+    {
+        tmp[i] = str[(size - 1) - i];
+    }
+    printf("%s", tmp);
 }
 
-void delete_char(char * str, char c )
+void delete_char(char *str, char c)
 {
-	char * addr;
-	addr = str;
+    char *addr;
+    addr = str;
 
-	while((addr = strchr(addr, c))) {
-		strcpy(addr, addr+1);
-	}
+    while ((addr = strchr(addr, c)))
+    {
+        strcpy(addr, addr + 1);
+    }
 
-	puts(str);
-
+    puts(str);
 }
 
 void create_file(char file_name[])
 {
-	FILE * file;
-	int new_contact;
-	struct contact myContact;
-	char c;
+    FILE *file;
+    int new_contact;
+    struct contact myContact;
+    char c;
 
-	file = fopen(file_name, "w");
+    file = fopen(file_name, "w");
 
-	do {
-		printf("Donner nom:");
-		scanf("%s",&myContact.nom[0]); getchar();
-		printf("Donner prenom:");
-		scanf("%s", &myContact.prenom[0]); getchar();
-		printf("Donner age:");
-		scanf("%s", &myContact.age[0]); getchar();
-		printf("Donner téléphone:");
-		scanf("%s", &myContact.tel[0]); getchar();
+    do
+    {
+        printf("Donner nom:");
+        scanf("%s", &myContact.nom[0]);
+        getchar();
+        printf("Donner prenom:");
+        scanf("%s", &myContact.prenom[0]);
+        getchar();
+        printf("Donner age:");
+        scanf("%s", &myContact.age[0]);
+        getchar();
+        printf("Donner téléphone:");
+        scanf("%s", &myContact.tel[0]);
+        getchar();
 
-		fwrite(&myContact.nom, sizeof(myContact.nom), 1, file);
-		fprintf(file, "\n");
-		fwrite(&myContact.prenom, sizeof(myContact.prenom), 1, file);
-		fprintf(file, "\n");
-		fwrite(&myContact.age, sizeof(myContact.age), 1, file);
-		fprintf(file, "\n");
-		fwrite(&myContact.tel, sizeof(myContact.tel), 1, file);
-		fprintf(file, "\n");
+        fwrite(&myContact.nom, sizeof(myContact.nom), 1, file);
+        fprintf(file, "\n");
+        fwrite(&myContact.prenom, sizeof(myContact.prenom), 1, file);
+        fprintf(file, "\n");
+        fwrite(&myContact.age, sizeof(myContact.age), 1, file);
+        fprintf(file, "\n");
+        fwrite(&myContact.tel, sizeof(myContact.tel), 1, file);
+        fprintf(file, "\n");
 
-		printf("Nouveau contact ?"); c = getchar();
-		new_contact = (c == 'O' ? 1 : 0);
+        printf("Nouveau contact ?");
+        c           = getchar();
+        new_contact = (c == 'O' ? 1 : 0);
 
-	}while(new_contact);
+    } while (new_contact);
 
-	fclose(file);
+    fclose(file);
 }
 
 void display_file(char file_name[])
 {
-	FILE * file;
-	int num = 1;
-	char ligne[LINE_MAX_F];
+    FILE *file;
+    int num = 1;
+    char ligne[LINE_MAX_F];
 
-	file = fopen(file_name, "r");
-	while(fgets(ligne, LINE_MAX_F, file)) {
-		printf("%5d", num++);
-		printf("%s", ligne);
-	}
-	fclose(file);
+    file = fopen(file_name, "r");
+    while (fgets(ligne, LINE_MAX_F, file))
+    {
+        printf("%5d", num++);
+        printf("%s", ligne);
+    }
+    fclose(file);
 }

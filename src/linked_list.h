@@ -6,9 +6,10 @@
 /*
  * Public structure which contains a linked list
  */
-typedef struct {
+typedef struct
+{
     int data;
-    void* next;
+    void *next;
 } linked_list_t;
 
 // Exported function prototypes
