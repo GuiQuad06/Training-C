@@ -33,8 +33,6 @@ typedef struct
 typedef void (*cb_clear_function_t)(const char *str);
 
 // Exported function prototypes
-char *my_strdup(const char *str);
-void *my_memdup(const void *data, size_t len);
 void string_list_init(string_list_t *list);
 void string_list_init_nodup(string_list_t *list);
 void string_list_clear_fct(string_list_t *list, cb_clear_function_t clearfunc);

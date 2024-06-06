@@ -5,21 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *my_strdup(const char *str)
-{
-    size_t len = strlen(str) + 1;
-    char *res  = malloc(len);
+// Private function prototypes
+static char *my_strdup(const char *str);
+static void *my_memdup(const void *data, size_t len);
 
-    if (res)
-        memcpy(res, str, len);
-    return res;
-}
-
-void *my_memdup(const void *data, size_t len)
-{
-    return memcpy(malloc(len), data, len);
-}
-
+// Public functions
 void string_list_init(string_list_t *list)
 {
     string_list_t empty = STRING_LIST_INIT;
@@ -135,4 +125,20 @@ int string_list_split(string_list_t *list, const char *str, int delim, int maxsp
             }
         }
     }
+}
+
+// Private functions
+static char *my_strdup(const char *str)
+{
+    size_t len = strlen(str) + 1;
+    char *res  = malloc(len);
+
+    if (res)
+        memcpy(res, str, len);
+    return res;
+}
+
+static void *my_memdup(const void *data, size_t len)
+{
+    return memcpy(malloc(len), data, len);
 }
