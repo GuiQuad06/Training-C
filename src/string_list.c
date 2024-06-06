@@ -5,21 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-char *my_strdup(const char *str)
-{
-    size_t len = strlen(str) + 1;
-    char *res  = malloc(len);
+// Private function prototypes
+static char *my_strdup(const char *str);
+static void *my_memdup(const void *data, size_t len);
 
-    if (res)
-        memcpy(res, str, len);
-    return res;
-}
-
-void *my_memdup(const void *data, size_t len)
-{
-    return memcpy(malloc(len), data, len);
-}
-
+// Public functions
 void string_list_init(string_list_t *list)
 {
     string_list_t empty = STRING_LIST_INIT;
@@ -32,46 +22,6 @@ void string_list_init_nodup(string_list_t *list)
     string_list_t empty = STRING_LIST_INIT_NODUP;
 
     memcpy(list, &empty, sizeof(*list));
-}
-
-void string_list_clear_fct(string_list_t *list, cb_clear_function_t clearfunc)
-{
-    if (list->item)
-    {
-        int i;
-        if (clearfunc)
-        {
-            for (i = 0; i < list->nb; i++)
-                clearfunc(list->item[i]);
-        }
-        if (list->dup_strings)
-        {
-            for (i = 0; i < list->nb; i++)
-                free(list->item[i]);
-        }
-        free(list->item);
-    }
-
-    list->item  = NULL;
-    list->nb    = 0;
-    list->alloc = 0;
-}
-
-void string_list_clear(string_list_t *list)
-{
-    if (list->item)
-    {
-        if (list->dup_strings)
-        {
-            for (int i = 0; i < list->nb; i++)
-                free(list->item[i]);
-        }
-        free(list->item);
-    }
-
-    list->item  = NULL;
-    list->nb    = 0;
-    list->alloc = 0;
 }
 
 item_t *string_list_append(string_list_t *list, const char *str)
@@ -135,4 +85,60 @@ int string_list_split(string_list_t *list, const char *str, int delim, int maxsp
             }
         }
     }
+}
+
+// Private functions
+static char *my_strdup(const char *str)
+{
+    size_t len = strlen(str) + 1;
+    char *res  = malloc(len);
+
+    if (res)
+        memcpy(res, str, len);
+    return res;
+}
+
+static void *my_memdup(const void *data, size_t len)
+{
+    return memcpy(malloc(len), data, len);
+}
+
+void string_list_clear_fct(string_list_t *list, cb_clear_function_t clearfunc)
+{
+    if (list->item)
+    {
+        int i;
+        if (clearfunc)
+        {
+            for (i = 0; i < list->nb; i++)
+                clearfunc(list->item[i]);
+        }
+        if (list->dup_strings)
+        {
+            for (i = 0; i < list->nb; i++)
+                free(list->item[i]);
+        }
+        free(list->item);
+    }
+
+    list->item  = NULL;
+    list->nb    = 0;
+    list->alloc = 0;
+}
+
+void string_list_clear(string_list_t *list)
+{
+    if (list->item)
+    {
+        if (list->dup_strings)
+        {
+            for (int i = 0; i < list->nb; i++)
+                free(list->item[i]);
+        }
+        free(list->item);
+    }
+
+    list->item  = NULL;
+    list->nb    = 0;
+    list->alloc = 0;
 }
