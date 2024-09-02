@@ -55,4 +55,3 @@ uint8_t xor_checksum(char *string, unsigned int size)
     return cs;
 }
 
-// Rajouter : Fonctions set & clear de bits
