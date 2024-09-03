@@ -10,7 +10,7 @@
 
 #include <stdint.h>
 
-void crc16_byte_process(int8_t byte);
-int16_t crc16_ccitt(const char *str);
+uint16_t crc16_byte_process(uint8_t byte);
+uint16_t crc16_ccitt(const char *str);
 
 #endif // CRC_H_
